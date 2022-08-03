@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.header{
+    width: 100%;
+    height: 5%;
+    background-color: #A67A5B;
+    padding: 0px 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.MyLibrary {
+    font-size: 30px;
+    margin-right: auto;
+}
+
+.btn{
+    /*border: none;*/
+    /*background: none;*/
+    margin-right: 20px;
+
+}
+
+.library{
+    width: 100%;
+    min-height: 95%;
+    background-color: #D5B895;
+    padding: 10px;
+
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.books{
+    width: 200px;
+    height: 150px;
+    background-color: #FAF0DC;
+    margin: 10px;
+
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+

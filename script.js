@@ -26,3 +26,4 @@ function addBookToLibrary() {
     let auxBook = new Book(title, author, pages, read);
     myLibrary.push(auxBook);
 }
+
