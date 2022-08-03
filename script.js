@@ -27,3 +27,21 @@ function addBookToLibrary() {
     myLibrary.push(auxBook);
 }
 
+
+function displayBooks(){
+    for(let x = 0; x < myLibrary.length; x++){
+        
+        myLibrary[x].info();
+    }
+}
+
+
+let theHobbit = new Book("the Hobbit", "J.R.R. Tolkien", 138, true);
+let atomicHabits = new Book("Atomic habits", "James Clear", 333, true);
+let theWayOfZen = new Book("the way of zen", "Alan watts", 255, true);
+
+myLibrary.push(theHobbit);
+myLibrary.push(atomicHabits);
+myLibrary.push(theWayOfZen);
+
+displayBooks();
