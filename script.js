@@ -15,3 +15,14 @@ function Book(title, author, pages, read) {
     }
 }
 
+function addBookToLibrary() {
+    let title = prompt("title: ");
+    let author = prompt("author: ");
+    let pages = prompt("pages: ");
+    let read = prompt("read: (1 if read, 0 if not read)");
+    if(read == 0) read = false;
+    read = Boolean(read);
+
+    let auxBook = new Book(title, author, pages, read);
+    myLibrary.push(auxBook);
+}
