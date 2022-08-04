@@ -1,14 +1,15 @@
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.read = read,
+    this.index = undefined;
 
     this.info = function() {
         if(this.read === true){
-            console.log(this.title + " by " + this.author + ", " + this.pages + " pages, already readed.");
+            console.log(this.title + " by " + this.author + ", " + this.pages + " pages, already readed. " + "index = " + this.index);
         } else {
             console.log(this.title + " by " + this.author + ", " + this.pages + " pages, not read yet.");
         }
@@ -24,7 +25,8 @@ function addBookToLibrary() {
     else read = true;
 
     let auxBook = new Book(title, author, pages, read);
-    myLibrary.push(auxBook);
+    auxBook.index = myLibrary.push(auxBook) - 1; // push return length, we save the index in which we pushed the object using length - 1
+    displayBooks();
 }
 
 
@@ -47,8 +49,8 @@ let theHobbit = new Book("the Hobbit", "J.R.R. Tolkien", 138, true);
 let atomicHabits = new Book("Atomic habits", "James Clear", 333, true);
 let theWayOfZen = new Book("the way of zen", "Alan watts", 255, true);
 
-myLibrary.push(theHobbit);
-myLibrary.push(atomicHabits);
-myLibrary.push(theWayOfZen);
+theHobbit.index = myLibrary.push(theHobbit) - 1;
+atomicHabits.index = myLibrary.push(atomicHabits) - 1;
+theWayOfZen.index = myLibrary.push(theWayOfZen) - 1;
 
 displayBooks();
