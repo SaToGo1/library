@@ -16,12 +16,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-    let title = prompt("title: ");
-    let author = prompt("author: ");
-    let pages = prompt("pages: ");
-    let read = prompt("read: (1 if read, 0 if not read)");
-    if(read == 0) read = false;
-    read = Boolean(read);
+    let title = document.getElementById("name").value;
+    let author = document.getElementById("author").value;
+    let pages = document.getElementById("pages").value;
+    let read = document.getElementById("read").value;
+    if(read == "not-read") read = false;
+    else read = true;
 
     let auxBook = new Book(title, author, pages, read);
     myLibrary.push(auxBook);
@@ -33,6 +33,14 @@ function displayBooks(){
         myLibrary[x].info();
     }
 }
+
+let form = document.getElementById("myForm");
+
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+    addBookToLibrary();
+});
+
 
 
 let theHobbit = new Book("the Hobbit", "J.R.R. Tolkien", 138, true);

@@ -25,15 +25,15 @@
     </div>
 
     <div class="sidebar">
-        <form class="form">
+        <form name="myForm" class="form" id="myForm">
 
             <div>
                 <label for="name">name: </label>
                 <input type="text" id="name" class="input" required>
             </div>
             <div>
-                <label for="autor">autor: </label>
-                <input type="text" id="autor" class="input" required>
+                <label for="author">author: </label>
+                <input type="text" id="author" class="input" required>
             </div>
             <div>
                 <label for="pages">pages: </label>
@@ -42,11 +42,11 @@
             <div>
                 <label for="read">read: </label>
                 <select name="read" id="read">
-                    <option value="read">Read</option>
-                    <option value="not-read">Not Read</option>
+                    <option value="read" selected>Readed</option>
+                    <option value="not-read">Not Readed</option>
                 </select>
             </div>
-            <button class="btn">Add book</button>
+            <button class="btn" id="AddBookButton">Add book</button>
         </form>
     </div>
     
