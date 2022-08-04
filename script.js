@@ -26,13 +26,53 @@ function addBookToLibrary() {
 
     let auxBook = new Book(title, author, pages, read);
     auxBook.index = myLibrary.push(auxBook) - 1; // push return length, we save the index in which we pushed the object using length - 1
-    displayBooks();
+    displayOneBook(auxBook);
 }
 
+//display one book, useful when we add new books.
+//so we don't have to re-do all the cards.
+function displayOneBook(auxBook){
 
+    let library = document.getElementById("library");
+    let readed = "Not readed";
+    if (auxBook.read == true) readed = "Readed";
+        
+    let newContent = document.createElement('div');
+    let bookCard = `<div class='books'> 
+        <div>${auxBook.title}</div> 
+        <div>By: ${auxBook.author}</div> 
+        <div>${auxBook.pages} pages</div> 
+        <div>read: ${readed}</div> 
+        <button>☒</button> 
+    </div>`;
+
+    newContent.innerHTML = bookCard; 
+    library.appendChild(newContent);
+}
+
+//display all the books on screen
 function displayBooks(){
+    let bookCard;
+    let library = document.getElementById("library");
+    library.innerHTML = "";
+
     for(let x = 0; x < myLibrary.length; x++){
-        myLibrary[x].info();
+
+        let readed = "Not readed";
+        if (myLibrary[x].read == true) readed = "Readed";
+        
+        let newcontent = document.createElement('div');
+        bookCard = `<div class='books'> 
+            <div>${myLibrary[x].title}</div> 
+            <div>by ${myLibrary[x].author}</div> 
+            <div>${myLibrary[x].pages} pages</div> 
+            <div>${readed}</div> 
+            <button>☒</button> 
+        </div>`;
+
+        newcontent.innerHTML = bookCard; 
+
+        library.appendChild(newcontent);
     }
 }
 
@@ -42,6 +82,8 @@ form.addEventListener('submit', function(event){
     event.preventDefault();
     addBookToLibrary();
 });
+
+
 
 
 
