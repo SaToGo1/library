@@ -84,3 +84,21 @@ body{
     outline: none;
     border-bottom: 1px solid;
 }
+
+.btnX{
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    color: black;
+}
+
+.btnX:hover{
+    /*color:#FF0000;*/
+    background-color: #FF00002F;
+
+}
+
+.btnX:active{
+    background-color: #FF00006F;
+}

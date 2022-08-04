@@ -43,7 +43,7 @@ function displayOneBook(auxBook){
         <div>By: ${auxBook.author}</div> 
         <div>${auxBook.pages} pages</div> 
         <div>read: ${readed}</div> 
-        <button>☒</button> 
+        <button class="btnX">☒</button> 
     </div>`;
 
     newContent.innerHTML = bookCard; 
@@ -67,7 +67,7 @@ function displayBooks(){
             <div>by ${myLibrary[x].author}</div> 
             <div>${myLibrary[x].pages} pages</div> 
             <div>${readed}</div> 
-            <button>☒</button> 
+            <button class="btnX">☒</button> 
         </div>`;
 
         newcontent.innerHTML = bookCard; 
