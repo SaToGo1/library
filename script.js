@@ -30,7 +30,6 @@ function addBookToLibrary() {
 
 function displayBooks(){
     for(let x = 0; x < myLibrary.length; x++){
-        
         myLibrary[x].info();
     }
 }
