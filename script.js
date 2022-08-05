@@ -6,93 +6,146 @@ function Book(title, author, pages, read) {
     this.pages = pages,
     this.read = read,
     this.index = undefined;
-
-    this.info = function() {
-        if(this.read === true){
-            console.log(this.title + " by " + this.author + ", " + this.pages + " pages, already readed. " + "index = " + this.index);
-        } else {
-            console.log(this.title + " by " + this.author + ", " + this.pages + " pages, not read yet.");
-        }
-    }
 }
 
-function addBookToLibrary() {
-    let title = document.getElementById("name").value;
-    let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value;
-    let read = document.getElementById("read").value;
-    if(read == "not-read") read = false;
-    else read = true;
+/* #######################
+#### Display the cards  ##
+##########################  */
 
-    let auxBook = new Book(title, author, pages, read);
-    auxBook.index = myLibrary.push(auxBook) - 1; // push return length, we save the index in which we pushed the object using length - 1
-    displayOneBook(auxBook);
-}
-
-//display one book, useful when we add new books.
-//so we don't have to re-do all the cards.
-function displayOneBook(auxBook){
+//Recieve one Book object as parameter, create an html
+//card from it and display it.
+//Also gives eventlistener to the button.
+function CreateCardAndDisplay(auxBook){
 
     let library = document.getElementById("library");
     let readed = "Not readed";
     if (auxBook.read == true) readed = "Readed";
         
+    //Here we create the card
     let newContent = document.createElement('div');
     let bookCard = `<div class='books'> 
         <div>${auxBook.title}</div> 
-        <div>By: ${auxBook.author}</div> 
+        <div>By ${auxBook.author}</div> 
         <div>${auxBook.pages} pages</div> 
         <div>read: ${readed}</div> 
-        <button class="btnX">☒</button> 
-    </div>`;
-
+        <button class="btnX" id="btnX_${auxBook.index}">☒</button> 
+    </div>`; //the button id is created using the index it's Book object has in myLibrary Array.
+             //to identify which position has the book of the card in myLibrary array.
     newContent.innerHTML = bookCard; 
+
+    //here we add the card to the DOM so
+    //we see it in the page.
     library.appendChild(newContent);
+
+    //we give to new created button an event listener.
+    AddEventListenerToButtonX(auxBook.index);
 }
 
-//display all the books on screen
-function displayBooks(){
-    let bookCard;
+//erase all the cards on screen, create 
+//again all the cards from the books
+//saved on myLibrary Array.
+function DisplayAllBookCards(){
+    //Select the library container where we place all the cards
+    //and we empty all the html.
     let library = document.getElementById("library");
-    library.innerHTML = "";
+    library.innerHTML = " "; // reset the contents
 
-    for(let x = 0; x < myLibrary.length; x++){
-
-        let readed = "Not readed";
-        if (myLibrary[x].read == true) readed = "Readed";
-        
-        let newcontent = document.createElement('div');
-        bookCard = `<div class='books'> 
-            <div>${myLibrary[x].title}</div> 
-            <div>by ${myLibrary[x].author}</div> 
-            <div>${myLibrary[x].pages} pages</div> 
-            <div>${readed}</div> 
-            <button class="btnX">☒</button> 
-        </div>`;
-
-        newcontent.innerHTML = bookCard; 
-
-        library.appendChild(newcontent);
+    //we remake all the cards of the library container
+    //loop through the myLibrary array and create cards. 
+    for(let i = 0; i < myLibrary.length; i++){
+        CreateCardAndDisplay(myLibrary[i]);
     }
 }
 
-let form = document.getElementById("myForm");
 
+/* #######################
+####    ADDs A BOOK!    ##
+##########################  */
+
+//get data from the form after submiting and turn it into a BookObject
+//and then passes it to addBookToLibrary.
+function CreateBookObjectFromForm() {
+    //get the values of the input from the form
+    let title = document.getElementById("name").value;
+    let author = document.getElementById("author").value;
+    let pages = document.getElementById("pages").value;
+    let read = document.getElementById("read").value;
+    
+    //we transform text value from read
+    //to boolean read(true) or not read(false)
+    if(read == "not-read") read = false;
+    else read = true;
+
+    //create book object and add to myLibrary
+    let auxBook = new Book(title, author, pages, read);
+    AddBookToLibrary(auxBook);
+}
+
+//recieve a Book object as parameter and add it to myLibrary Array.
+function AddBookToLibrary(myBook){
+    
+    //let auxBook = new Book(myBook.title, myBook.author, myBook.pages, myBook.read);
+    myBook.index = myLibrary.push(myBook) - 1; //push also return the length, length - 1 is used to get the index.
+
+    //After adding a new book we create and display his card.
+    CreateCardAndDisplay(myBook);
+}
+
+//Event listener from the form to add new books.
+let form = document.getElementById("myForm");
 form.addEventListener('submit', function(event){
+    //Don't let the form to autosubmit.
     event.preventDefault();
-    addBookToLibrary();
+    CreateBookObjectFromForm();
 });
 
+/* #######################
+#### DELETE A BOOK!     ##
+##########################  */
+
+//adds an event listener to the delete button from a card, the button 
+//id is defined by the index its Book has in myLibrary Array.
+function AddEventListenerToButtonX(index) {
+    let btnX = document.getElementById(`btnX_${index}`);
+    btnX.addEventListener('click', function(event){
+        DeleteBook(index);
+        ActualizeIndex();
+
+        //after deleting a book we need to erase the cards and print them again.
+        //we need to erase all the cards because also we will have conflict with the index
+        //of the books and the index of the delete buttons.
+        DisplayAllBookCards();
+    });
+}
+
+//After delete one element of myLibrary Array as the array shifts
+//we need to actualize all the indexes.
+function ActualizeIndex(){
+    for(let i = 0; i < myLibrary.length; i++){
+        myLibrary[i].index = i;
+    }
+}
+
+//Recieve the index as parameter and delete the book on 
+//myLibrary array.
+function DeleteBook(index){
+    myLibrary.splice(index, 1);
+}
 
 
 
+/* #######################
+#### TESTING AREA       ##
+##########################  */
 
+/* Some books for testing */
 let theHobbit = new Book("the Hobbit", "J.R.R. Tolkien", 138, true);
 let atomicHabits = new Book("Atomic habits", "James Clear", 333, true);
 let theWayOfZen = new Book("the way of zen", "Alan watts", 255, true);
 
-theHobbit.index = myLibrary.push(theHobbit) - 1;
-atomicHabits.index = myLibrary.push(atomicHabits) - 1;
-theWayOfZen.index = myLibrary.push(theWayOfZen) - 1;
+AddBookToLibrary(theHobbit);
+AddBookToLibrary(atomicHabits);
+AddBookToLibrary(theWayOfZen);
 
-displayBooks();
+//initial display
+DisplayAllBookCards();
