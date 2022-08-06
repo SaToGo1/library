@@ -27,7 +27,7 @@ function CreateCardAndDisplay(auxBook){
         <div>${auxBook.title}</div> 
         <div>By ${auxBook.author}</div> 
         <div>${auxBook.pages} pages</div> 
-        <div>read: ${readed}</div> 
+        <button class="read-Btn" id="read-Btn_${auxBook.index}">${readed}</button> 
         <button class="btnX" id="btnX_${auxBook.index}">☒</button> 
     </div>`; //the button id is created using the index it's Book object has in myLibrary Array.
              //to identify which position has the book of the card in myLibrary array.
@@ -39,6 +39,9 @@ function CreateCardAndDisplay(auxBook){
 
     //we give to new created button an event listener.
     AddEventListenerToButtonX(auxBook.index);
+
+    //we give to new created button an event listener.
+    AddEventListenerToReadButton(auxBook.index);
 }
 
 //erase all the cards on screen, create 
@@ -134,6 +137,24 @@ function DeleteBook(index){
 
 
 
+
+/* #######################
+#### Read Button        ##
+##########################  */
+
+//add event listener to the read button
+//We check our Book in myLibrary and change the
+//boolean read attribute to the opposite and then
+//actualize the cards.
+function AddEventListenerToReadButton(index) {
+    let readButton = document.getElementById(`read-Btn_${index}`);
+    readButton.addEventListener('click', function(event){
+    
+        myLibrary[index].read = !myLibrary[index].read;
+        DisplayAllBookCards();
+    });
+}
+
 /* #######################
 #### TESTING AREA       ##
 ##########################  */
@@ -141,7 +162,7 @@ function DeleteBook(index){
 /* Some books for testing */
 let theHobbit = new Book("the Hobbit", "J.R.R. Tolkien", 138, true);
 let atomicHabits = new Book("Atomic habits", "James Clear", 333, true);
-let theWayOfZen = new Book("the way of zen", "Alan watts", 255, true);
+let theWayOfZen = new Book("the way of zen", "Alan watts", 255, false);
 
 AddBookToLibrary(theHobbit);
 AddBookToLibrary(atomicHabits);
