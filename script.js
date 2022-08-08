@@ -24,11 +24,13 @@ function CreateCardAndDisplay(auxBook){
     //Here we create the card
     let newContent = document.createElement('div');
     let bookCard = `<div class='books'> 
-        <div>${auxBook.title}</div> 
+        <div class="title-btnX">
+            <div class="titleBook">${auxBook.title}</div> 
+            <button class="btnX" id="btnX_${auxBook.index}">☒</button> 
+        </div>
         <div>By ${auxBook.author}</div> 
         <div>${auxBook.pages} pages</div> 
         <button class="read-Btn" id="read-Btn_${auxBook.index}">${readed}</button> 
-        <button class="btnX" id="btnX_${auxBook.index}">☒</button> 
     </div>`; //the button id is created using the index it's Book object has in myLibrary Array.
              //to identify which position has the book of the card in myLibrary array.
     newContent.innerHTML = bookCard; 

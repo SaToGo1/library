@@ -86,8 +86,10 @@ body{
 }
 
 .btnX{
+    font-size: 15px;
+
     width: 20px;
-    height: 20px;
+    height: 25px;
     background: none;
     border: none;
     color: black;
@@ -120,4 +122,13 @@ body{
 
 .read-Btn:active{
     background-color: #A67A5B;/*#FF00006F;*/
+}
+
+.title-btnX{
+    width: 100%;
+    display: flex;
+}
+
+.titleBook{
+    margin-right: auto;
 }
