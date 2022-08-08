@@ -151,7 +151,9 @@ function AddEventListenerToReadButton(index) {
     readButton.addEventListener('click', function(event){
     
         myLibrary[index].read = !myLibrary[index].read;
-        DisplayAllBookCards();
+
+        if(readButton.innerHTML == "Not readed") readButton.innerHTML = "Readed";
+        else readButton.innerHTML = "Not readed";
     });
 }
 
