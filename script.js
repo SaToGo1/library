@@ -77,15 +77,17 @@ function CreateBookObjectFromForm() {
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pages").value;
     let read = document.getElementById("read").value;
-    
-    //we transform text value from read
-    //to boolean read(true) or not read(false)
-    if(read == "not-read") read = false;
-    else read = true;
 
-    //create book object and add to myLibrary
-    let auxBook = new Book(title, author, pages, read);
-    AddBookToLibrary(auxBook);
+    if(checkValidity()){
+        //we transform text value from read
+        //to boolean read(true) or not read(false)
+        if(read == "not-read") read = false;
+        else read = true;
+
+        //create book object and add to myLibrary
+        let auxBook = new Book(title, author, pages, read);
+        AddBookToLibrary(auxBook);
+    }
 }
 
 //recieve a Book object as parameter and add it to myLibrary Array.
@@ -159,6 +161,35 @@ function AddEventListenerToReadButton(index) {
         if(readButton.innerHTML == "Not readed") readButton.innerHTML = "Readed";
         else readButton.innerHTML = "Not readed";
     });
+}
+ /**
+  * Check if the input are filled correctly.
+  */
+function checkValidity(){
+    let title = document.getElementById("name");
+    let author = document.getElementById("author");
+    let pages = document.getElementById("pages");
+    let read = document.getElementById("read");
+    
+    title.required = true;
+    if (title.validity.valueMissing){
+        title.setCustomValidity('fill the name.');
+        return false;
+    }
+
+    author.required = true;
+    if (author.validity.valueMissing){
+        author.setCustomValidity('fill the author.');
+        return false;
+    }
+
+    pages.required = true;
+    if (pages.validity.valueMissing){
+        pages.setCustomValidity('fill the pages.');
+        return false;
+    }
+
+    return true;
 }
 
 /* #######################
